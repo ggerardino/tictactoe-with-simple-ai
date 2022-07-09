@@ -1,3 +1,2 @@
 # tictactoe with simple ai
-simple implementation of tictactoe with ai that uses minimax algorithm\n
-gui is to be implemented soon 
+simple implementation of tictactoe with ai that uses minimax algorithm and gui to be implemented soon
