@@ -1,5 +1,5 @@
 import board
-import game
+import controller
 import math
 
 def ai_move():
@@ -17,11 +17,11 @@ def ai_move():
     board.updateBoard("X", bestMove[0], bestMove[1])
 
 def minimax(board, depth, isMaximizing):
-    if(game.check_winner() == 1):
+    if(controller.check_winner() == 1):
         return 1
-    elif(game.check_winner() == 0):
+    elif(controller.check_winner() == 0):
         return -1
-    elif(game.check_draw() == False):
+    elif(controller.check_draw() == False):
         return 0
     
     if(isMaximizing == True):
