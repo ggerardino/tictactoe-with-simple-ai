@@ -1,5 +1,4 @@
 import pygame, sys
-import numpy as np
 import controller as c
 import board as b
 import ai
