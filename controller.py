@@ -65,13 +65,11 @@ def check_winner():
 
 # Checks if Draw
 def check_draw():
-    bFlag = False
     for i in range(3):
         for j in range(3):
-            bFlag = board.getPiece(i,j) == " "
-            if(bFlag == True):
-                return bFlag
-    return bFlag
+            if(board.getPiece(i,j) == " "):
+              return True
+    return False
 
 # Displays Winner
 def display_winner():

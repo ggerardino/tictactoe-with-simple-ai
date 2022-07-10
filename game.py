@@ -39,7 +39,8 @@ def draw_figures():
                 pygame.draw.line( screen, CROSS_COLOR, (col * 200 + 55, row * 200 + 55), (col * 200 + 200 - 55, row * 200 + 200 - 55), LINE_WIDTH)
                 
 draw_lines()
-while True:
+gameOver = False
+while(True):
     for event in pygame.event.get():
         if(event.type == pygame.QUIT):
             sys.exit()
@@ -51,9 +52,22 @@ while True:
             c_col = int(mx // 200)
             if(c.isValid(USER, c_row, c_col)):
                 b.updateBoard("O", c_row, c_col)
+                winner = c.check_winner()
+                draw = c.check_draw()
+                if(winner == 0 or winner == 1):
+                    c.display_winner()
+                elif(draw == False):
+                    print("It's a draw!")
                 USER = 1
         elif(USER == 1):
             ai.ai_move()
+            winner = c.check_winner()
+            draw = c.check_draw()
+            if(winner == 0 or winner == 1):
+                c.display_winner()
+            elif(draw == False):
+                print("It's a draw!")
             USER = 0
         draw_figures()
+    draw_figures
     pygame.display.update()
