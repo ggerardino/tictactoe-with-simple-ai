@@ -14,8 +14,8 @@ CIRCLE_RADIUS = 60
 CIRCLE_WIDTH = 5
 FIGURE_COLOR = (255, 255, 255)
 CROSS_COLOR = (0, 0, 0)
-global USER
-USER = 1
+global TURN
+TURN = 1 # Ai goes first
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("TicTacToe")
@@ -43,30 +43,34 @@ while(True):
     for event in pygame.event.get():
         if(event.type == pygame.QUIT):
             sys.exit()
-        if(event.type == pygame.MOUSEBUTTONDOWN and USER == 0):
+        if(event.type == pygame.MOUSEBUTTONDOWN and TURN == 0 and gameOver == False):
             mx = event.pos[0]
             my = event.pos[1]
 
             c_row = int(my // 200)
             c_col = int(mx // 200)
-            if(c.isValid(USER, c_row, c_col)):
+            if(c.isValid(TURN, c_row, c_col)):
                 b.updateBoard("O", c_row, c_col)
-                winner = c.check_winner()
+                winner = c.check_winner(TURN)
                 draw = c.check_draw()
                 if(winner == 0 or winner == 1):
-                    c.display_winner()
+                    c.display_winner(TURN)
+                    gameOver = True
                 elif(draw == False):
                     print("It's a draw!")
-                USER = 1
-        elif(USER == 1):
-            ai.ai_move()
-            winner = c.check_winner()
+                    gameOver = True
+                TURN = 1
+        elif(TURN == 1 and gameOver == False):
+            ai.ai_move(TURN)
+            winner = c.check_winner(TURN)
             draw = c.check_draw()
             if(winner == 0 or winner == 1):
-                c.display_winner()
+                c.display_winner(TURN)
+                gameOver = True
             elif(draw == False):
                 print("It's a draw!")
-            USER = 0
+                gameOver = True
+            TURN = 0
         draw_figures()
     draw_figures
     pygame.display.update()
